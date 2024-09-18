@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.text-a{
+    font-size: small;
+}
+.pagination-container {
+    margin-left: auto;
+  }

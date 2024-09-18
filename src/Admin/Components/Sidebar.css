@@ -1,0 +1,68 @@
+*{
+    margin:0;
+    padding:0;
+    text-decoration: none;
+}
+.container{
+    display:flex;
+}
+main{
+    width: 100%;
+    padding: 20px;
+}
+/* Ellipse 6 */
+
+/* position: absolute;
+width: 75px;
+height: 75px;
+left: 191px;
+top: 343px;
+
+background: #DCCBFD; */
+
+.sidebar{
+    /* background: #001715; */
+    /* color: black; */
+    position: fixed;
+    height: 100vh;
+    width: 400px;
+    transition: all 0.5s;
+}
+.top_section{
+    display: flex;
+    align-items:center;
+    padding:20px 15px;
+}
+.logo{
+    font-size: 30px;
+    
+}
+.bars{
+    display: flex;
+    font-size: 25px;
+    margin-left: 50px;
+}
+.link{
+    display: flex;
+    color: black;
+    padding: 8px 8px;
+    gap: 15px;
+    transition: all 0.5s;
+}
+/* .link:hover{
+    background:#DCCBFD;
+    color: #000;
+    border-radius: 40px; 
+    transition: all 0.5s;
+} */
+.active{
+    /* background: #DCCBFD; */
+    background: #6561cd;
+    border-radius: 16px; 
+    color: white;
+    margin-left: 20px; 
+    margin-right: 20px; 
+}
+.icon, .link_text{
+    font-size: 15px;
+}
