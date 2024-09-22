@@ -247,23 +247,21 @@ const formatDate= (date)=>{
 
 
 //use for changing the status of task with PENDING(By Default), IN_PROGRESS  & DONE
-const handleTestingStatusChange = async (status) => {
+const handleTaskStatusChange = async (status) => {
     // Handle accept action
     
      const sure =  window.confirm(`Confirm to update the Task Status as ${status}? `)
      if(!sure) return false;
       try {
               let response = await apiConnector({ 
-                      method: "PUT",
-                      url: `${url}/api/routingTaskStatus/${id}`,
-                      bodyData: {
-                      statusToChange:status 
-                    },
+                      method: "PATCH",
+                      url: `${url}/api/taskassigner/tasks/task-status/${id}/${status}`,
+                    
                       headers: headers,
               });
               if (response.status === 200) {
                       setRefresh(!refresh);
-                      toast.success("Task Status changed successfully");
+                      toast.success(response?.data?.message);
 
               }else{
                       toast.error("Some error occured! "+response?.data?.message);
@@ -291,6 +289,10 @@ const [selectedEmpId,setSelectedEmpId]=useState(null);
       {/* <EmployeeDetailsDialog empid={selectedEmpId} onClose={handleCloseDialog} /> */}
         <div className="timeline">
         
+
+        {/*  %%%%%%%%%%%%%%%%%%%%%  TASK DATA STARTED  %%%%%%%%%%%%%%%%%%%%% */}
+
+
           <div className=" contner right-contner mb-2 min-w-[500px]  ">
             <FontAwesomeIcon
               icon={faCircle}
@@ -348,16 +350,17 @@ const [selectedEmpId,setSelectedEmpId]=useState(null);
                             Add comment or Reply
                           </button>
 
-                          {    serviceData?.status==='DONE'   &&
-                              <button className="btn btn-sm bg-primary text-white  m-2" onClick={()=>handleTestingStatusChange("PENDING")}>Re-Open Task</button>
+                          {    serviceData?.status==='CLOSE'   &&
+                              <button className="btn btn-sm bg-primary text-white  m-2" onClick={()=>handleTaskStatusChange("PENDING")}>Re-Open Task</button>
 
                           }
                           {    serviceData?.status==='PROGRESS'   &&
-                              <button className="btn btn-sm bg-success text-white  m-2" onClick={()=>handleTestingStatusChange("DONE")}>Mark Status Completed</button>
-
+                           ( <>   <button className="btn btn-sm bg-success text-white  m-2" onClick={()=>handleTaskStatusChange("CLOSE")}>Mark Status Completed</button>
+                              <button className="btn btn-sm bg-primary text-white  m-2" onClick={()=>handleTaskStatusChange("PENDING")}>Mark Status PENDING</button>
+                              </> )
                           }
-                          {    serviceData?.status==='PENDING'   &&
-                              <button className="btn btn-sm bg-info text-white  m-2" onClick={()=>handleTestingStatusChange("IN_PROGRESS")}>Mark Status in Progress</button>
+                          {    serviceData?.status==='OPEN'   &&
+                              <button className="btn btn-sm bg-info text-white  m-2" onClick={()=>handleTaskStatusChange("PROGRESS")}>Mark Status in Progress</button>
 
                           }
 
@@ -367,6 +370,9 @@ const [selectedEmpId,setSelectedEmpId]=useState(null);
               <span className="right-contner-arrow"></span>
             </div>
           </div>
+
+
+        {/*  %%%%%%%%%%%%%%%%%%%%%  TASK DATA ENDED  %%%%%%%%%%%%%%%%%%%%% */}
 
 
       
@@ -445,15 +451,15 @@ const [selectedEmpId,setSelectedEmpId]=useState(null);
                           </button>
 
                           {    serviceData?.status==='DONE'   &&
-                              <button className="btn btn-sm bg-primary text-white  m-2" onClick={()=>handleTestingStatusChange("PENDING")}>Re-Open Task</button>
+                              <button className="btn btn-sm bg-primary text-white  m-2" onClick={()=>handleTaskStatusChange("PENDING")}>Re-Open Task</button>
 
                           }
                           {    serviceData?.status==='IN_PROGRESS'   &&
-                              <button className="btn btn-sm bg-success text-white  m-2" onClick={()=>handleTestingStatusChange("DONE")}>Mark Status Completed</button>
+                              <button className="btn btn-sm bg-success text-white  m-2" onClick={()=>handleTaskStatusChange("DONE")}>Mark Status Completed</button>
 
                           }
                           {    serviceData?.status==='PENDING'   &&
-                              <button className="btn btn-sm bg-info text-white  m-2" onClick={()=>handleTestingStatusChange("IN_PROGRESS")}>Mark Status in Progress</button>
+                              <button className="btn btn-sm bg-info text-white  m-2" onClick={()=>handleTaskStatusChange("IN_PROGRESS")}>Mark Status in Progress</button>
 
                           }
 

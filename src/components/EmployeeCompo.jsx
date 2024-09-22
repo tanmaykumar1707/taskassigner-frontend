@@ -386,7 +386,7 @@ const employee = useSelector((state) => state.employee);
 
         // Check if the API call was successful
         if (response.status === 201) {
-          toast.success("Employee added successfully");
+          toast.success(response?.data?.message);
           
         }else{
           toast.error(`Error --${response?.data?.message}`);
@@ -399,9 +399,9 @@ const employee = useSelector((state) => state.employee);
         // return Promise.resolve();
       } catch (error) {
         // Handle errors if necessary
-        toast.error(`${error?.response?.data?.errorMessage}`);
+        toast.error(`${error?.response?.data?.message}`);
         console.error("Error Creating user:", error);
-        ///throw error; // Re-throw the error to be caught by onMutate or onSettled
+       // throw error; // Re-throw the error to be caught by onMutate or onSettled
       }
 
 
@@ -534,19 +534,20 @@ function useUpdateUser() {
         
         const response = await apiConnector({
           method: "PUT",
-          url: `${url}/api/employee/${user._id}`, // Assuming user._id exists
+          url: `${url}/api/taskassigner/users/${user.userId}`, // Assuming user._id exists
           bodyData: {
             name: user.name,
             email: user.email,
-            phone: user.mobileNumber,
-            role: user.role 
+            mobileNumber: user.mobileNumber,
+            role: user.role ,
+            password:"NO_CHANGE"
           },
           headers: headers,
         });
 
         // Check if the API call was successful
         if (response.status === 200) {
-          toast.success("User updated successfully");
+          toast.success(`${response?.data?.message}`);
         }
 
         // Simulate a delay (remove this line if not needed)
@@ -601,9 +602,9 @@ function useDeleteUser() {
         // Check if the API call was successful
         if (response.status === 200) {
          
-          toast.success(`${response?.data?.statusMsg}`);
+          toast.success(`${response?.data?.message}`);
         }else{
-          toast.error("Some error occured!")
+          toast.success(`${response?.data?.message}`);
         }
       } catch (error) {
         toast.error(`Error : ${error?.response?.data?.message}`);

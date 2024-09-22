@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Loader from "../components/loader/loader";
 
+import {utils} from "../services/utils";
 
 
 
@@ -139,8 +140,8 @@ const handleSubmitRoutingtask = async (e) => {
 
   try {
     let response = await apiConnector({
-      method: (serviceEditData && serviceEditData?._id) ? "PUT": "POST",
-      url: (serviceEditData && serviceEditData?._id) ? `${url}/api/taskassigner/tasks/${serviceEditData?.taskId}`  :  `${url}/api/taskassigner/tasks`,
+      method: (serviceEditData && serviceEditData?.taskId) ? "PUT": "POST",
+      url: (serviceEditData && serviceEditData?.taskId) ? `${url}/api/taskassigner/tasks/${serviceEditData?.taskId}`  :  `${url}/api/taskassigner/tasks`,
       bodyData: {
         subject:taskSubject,
         remarks:remarks,
@@ -191,14 +192,19 @@ const handleSubmitRoutingtask = async (e) => {
 
         <div className="col-sm-12">
           <div className="row mt-3 ">
-             { (employee.role==='admin' || employee.role==='Account Manager')  && <button
+             { 
+             
+            //  (employee.role==='admin' || employee.role==='delegator') 
+             
+             utils.checkRoleAdminOrDelegator(employee.role)
+              && <button
                   type="button"
                   className=" btn bg-blue-700 text-sm text-white border-white shadow-lg mb-2"
                   data-toggle="modal"
                   data-target="#addNewAccModal"
                   ref={openSerModalRef}
                 >
-                  Create Routing Task
+                  Create  Task
                   <FontAwesomeIcon className="ml-1" icon={faPlus} />
                 </button>}   
 
@@ -350,7 +356,7 @@ const handleSubmitRoutingtask = async (e) => {
 
 
 
-<h2 className='text-bold text-black'> {employee.role==='NOC Manager' ? "Routing Task Assigned to You" :"Routing Task Assigned by You"}  </h2>
+<h2 className='text-bold text-black'> { !utils.checkRoleAdminOrDelegator(employee.role) ? " Task Assigned to You" :" Task Assigned by You"}  </h2>
 
 
 <br/>

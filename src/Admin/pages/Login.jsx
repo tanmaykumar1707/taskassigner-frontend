@@ -1,7 +1,7 @@
 import React, { useState ,useEffect} from 'react';
 import Loader from '../../components/loader/loader';
  import Image from '../assets/4949455_19732 1.png';
- import LogoImage from '../assets/logo_tapvox.png';
+ import LogoImage from '../assets/logo_task.png';
  import swipeLogoImage from '../assets/swipedesk.png';
 
 import { useDispatch, useSelector } from 'react-redux';

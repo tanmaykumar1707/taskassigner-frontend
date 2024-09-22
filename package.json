@@ -55,10 +55,7 @@
     "start:uat": "env-cmd -f .env.uat react-scripts start",
     "start:prod": "env-cmd -f .env.prod react-scripts start",
     "build:uat": "env-cmd -f .env.uat react-scripts build",
-    "build:prod": "env-cmd -f .env.prod react-scripts build",
-
-    "start:swipe": "env-cmd -f .env.swipe react-scripts start",
-    "build:swipeprod": "env-cmd -f .env.swipeprod react-scripts build"
+    "build:prod": "env-cmd -f .env.prod react-scripts build"
 
   },
   "eslintConfig": {

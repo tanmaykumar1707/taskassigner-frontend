@@ -24,22 +24,32 @@ const Dashboard = () => {
   };
   const [screenLoad,setScreenLoad]=useState(true);
  
+  const[taskCounts,setTaskCounts] =useState({});
     
-
-  
-
-
-  
-
-  
-
-
-
-
-  
 
 
   useEffect(() => {
+
+
+
+
+    const params = {
+      method: "GET",
+      url:`${url}/api/taskassigner/tasks/counts`,
+      headers: headers,
+    };
+  apiConnector(params)
+    .then((response) => {
+      setTaskCounts(response.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching daily progress reports:", error?.data?.response?.message);
+      // setLoading(false);
+    });
+
+
+
+
    
       const delay = setTimeout(() => {
         setScreenLoad(false)
@@ -84,23 +94,126 @@ const Dashboard = () => {
           </button>
         </div>
 
-        {/*<!--* Content Row -->*/}
+
         <div className="row">
-          {/* <div className="card col-sm-3">
-        <div className="card-header p-3 pt-2">
-          <div className="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-            <i className="material-icons opacity-10">weekend</i>
+
+
+
+               {/*<!--* Latest Code example -->*/}
+          <div className="col-xl-3 col-md-3 mb-3">
+            <div className="card border-left-primary shadow h-100 ">
+              <div className="card-body">
+                <div className="row no-gutters align-items-center">
+                  <div className="col mr-2">
+                    <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                    {/* {employee?.role==='admin' ?  "Latest Reports" : "My Latest Reports"}  */}
+                    Total Task
+                    </div>
+                    <div className="h5 font-weight-bold text-gray-800">
+                    {/* Reports */}
+                    </div>
+                  </div>
+                  <div className="col-auto">
+                    <i className="fas fa-calendar fa-2x text-gray-300"></i>
+                  </div>
+                </div>      
+                <h1 style={{ fontSize: "5rem",color:"black" }}> {taskCounts?.open} </h1> {/* Increased the font size */}
+
+              </div>
+            </div>
           </div>
-          <div className="text-end pt-1">
-            <p className="text-sm mb-0 text-capitalize">Today's Money</p>
-            <h4 className="mb-0">$53k</h4>
+
+
+
+
+           {/*<!--* Latest Code example -->*/}
+           <div className="col-xl-3 col-md-3 mb-3">
+            <div className="card border-left-info shadow h-100 ">
+              <div className="card-body">
+                <div className="row no-gutters align-items-center">
+                  <div className="col mr-2">
+                    <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                    {/* {employee?.role==='admin' ?  "Latest Reports" : "My Latest Reports"}  */}
+                    Pending Task
+                    </div>
+                    <div className="h5 font-weight-bold text-gray-800">
+                    {/* Reports */}
+                    </div>
+                  </div>
+                  <div className="col-auto">
+                    <i className="fas fa-calendar fa-2x text-gray-300"></i>
+                  </div>
+                </div>      
+                <h1 style={{ fontSize: "5rem",color:"black" }}> {taskCounts?.pending} </h1> {/* Increased the font size */}
+
+              </div>
+            </div>
           </div>
+
+
+          <div className="col-xl-3 col-md-3 mb-3">
+            <div className="card border-left-danger shadow h-100 ">
+              <div className="card-body">
+                <div className="row no-gutters align-items-center">
+                  <div className="col mr-2">
+                    <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                    {/* {employee?.role==='admin' ?  "Latest Reports" : "My Latest Reports"}  */}
+                    OPEN Task
+                    </div>
+                    <div className="h5 font-weight-bold text-gray-800">
+                    {/* Reports */}
+                    </div>
+                  </div>
+                  <div className="col-auto">
+                    <i className="fas fa-calendar fa-2x text-gray-300"></i>
+                  </div>
+                </div>      
+                <h1 style={{ fontSize: "5rem",color:"black" }}> {taskCounts?.open} </h1> {/* Increased the font size */}
+
+              </div>
+            </div>
+          </div>
+
+
+
+          <div className="col-xl-3 col-md-3 mb-3">
+            <div className="card border-left-info  shadow h-100 ">
+              <div className="card-body">
+                <div className="row no-gutters align-items-center">
+                  <div className="col mr-2">
+                    <div className="text-xs font-weight-bold text-info text-uppercase mb-1">
+                    {/* {employee?.role==='admin' ?  "Latest Reports" : "My Latest Reports"}  */}
+                    In Progress Task
+                    </div>
+                    <div className="h5 font-weight-bold text-gray-800">
+                    {/* Reports */}
+                    </div>
+                  </div>
+                  <div className="col-auto">
+                    <i className="fas fa-calendar fa-2x text-gray-300"></i>
+                  </div>
+                </div>      
+                <h1 style={{ fontSize: "5rem",color:"black" }}> {taskCounts?.progress} </h1> {/* Increased the font size */}
+
+              </div>
+            </div>
+          </div>
+
+
         </div>
-        <hr className="dark horizontal my-0"/>
-        <div className="card-footer p-3">
-          <p className="mb-0"><span className="text-success text-sm font-weight-bolder">+55% </span>than last week</p>
-        </div>
-      </div> */}
+        
+        
+        
+        
+        
+        {/*<!--* Content Row -->*/}
+
+
+
+
+
+        <div className="row">
+         
 
           {/*<!--* Latest Code example -->*/}
           <div className="col-xl-6 col-md-6 mb-6">
@@ -209,7 +322,7 @@ const Dashboard = () => {
                 <div className="row no-gutters align-items-center">
                   <div className="col mr-2">
                     <div className="text-xs font-weight-bold text-info text-uppercase mb-1">
-                      Top Working Routes
+                      Top Priority Task 
                     </div>
                     <div className="row no-gutters align-items-center">
                       <div className="col-auto">

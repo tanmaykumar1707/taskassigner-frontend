@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { apiConnector } from '../../services/apiConnector';
 import {url} from '../../services/api'
 import 'react-toastify/dist/ReactToastify.css';
-import LogoImage from '../assets/logo_tapvox.png';
+import LogoImage from '../assets/logo_task.png';
 import swipeLogoImage from '../assets/swipedesk.png';
 
  

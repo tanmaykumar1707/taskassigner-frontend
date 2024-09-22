@@ -29,5 +29,17 @@ export const utils = {
           else if(status==="DONE" )
               return <span className="text-white bg-[#24A148] px-4 md:pl-20 lg:pl-20 md:pr-20 lg:pr-20 md:ml-3"> DONE</span>
           else return status;
-          }
+          },
+
+    checkRoleOnlyAdmin(role){
+
+        return role==='admin' ? true : false;
+        
+    },
+
+    checkRoleAdminOrDelegator(role){
+        
+        return  (role=='admin' || role==='delegator') ? true : false;
+    }
+    
   };

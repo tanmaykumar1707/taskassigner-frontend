@@ -68,7 +68,7 @@ const TaskCompo = (props) => {
           },
 
           {
-            accessorFn: (row) =>  row.assignedFrom.name  ,
+            accessorFn: (row) =>  row.assignedFrom?.name  ,
             id:'assignedFrom',
             header: 'AssignedFrom',
             size: 30,
